@@ -7,9 +7,15 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      op: ''
+      activeNum: "0",
+      storedNum: null,
+      operation: null
     }
     this.handleClick = this.handleClick.bind(this)
+  }
+
+  componentDidUpdate() {
+    console.log(this.state)
   }
 
   handleClick(key) {
