@@ -23,6 +23,7 @@ export default function operation(key, state) {
       return backspace(state)
     default:
       console.log('invalid operation')
+      return state
   }
 }
 
@@ -72,20 +73,27 @@ function decimal(state) {
 }
 
 function negate(state) {
-  const active = state.activeNum
-  let num
-  if (active === '0') return state
-  if (active === null && state.storedNum)
-    num = state.storedNum
-  if (active[0] === '-')
-    num = active.slice(1)
-  else {
-    num = '-' + active
+  const neg = (num) => {
+    if (num[0] === '-')
+      return num.slice(1)
+    else {
+      return '-' + num
+    }
   }
-  
-  return {
-    ...state,
-    activeNum: num
+
+  const active = state.activeNum
+  if (active === '0') return state
+  if (active === null && state.storedNum) {
+    return {
+      ...state,
+      storedNum: neg(state.storedNum)
+    }
+  }
+  else {
+    return {
+      ...state,
+      activeNum: neg(active)
+    }
   }
 }
 
@@ -101,7 +109,7 @@ function clear() {
 function op(key, state) {
   const {activeNum, storedNum, operation} = state
   let result = storedNum
-  if (storedNum && activeNum) {
+  if (storedNum && activeNum && operation) {
     result = calculate(
       operation, 
       parseFloat(storedNum), 
@@ -123,9 +131,15 @@ function op(key, state) {
 function equals(state) {
   const {activeNum, storedNum, operation} = state
   let result
-  if (activeNum && !storedNum) return state
+  if (!operation) return state
+  if (activeNum && !storedNum) {
+    result = calculate(
+      operation, 
+      parseFloat(activeNum), 
+      parseFloat(activeNum)
+    )
+  }
   if (storedNum && !activeNum) {
-    if (!operation) return state
     result = calculate(
       operation, 
       parseFloat(storedNum), 

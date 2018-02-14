@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Keypad from './Keypad'
+import Display from './Display'
 import operation from './operation'
 //import './App.css'
 
@@ -15,10 +16,6 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this)
   }
 
-  componentDidUpdate() {
-    console.log(this.state)
-  }
-
   handleClick(key) {
     this.setState(prevState => {
       return operation(key, prevState)
@@ -26,9 +23,13 @@ class App extends Component {
   }
 
   render() {
+    const {activeNum, storedNum} = this.state
     return (
       <div className="App">
-        <div>{this.state.op}</div>
+        <Display
+          active={activeNum}
+          stored={storedNum}
+        />
         <Keypad
           handleClick={this.handleClick}
         />
