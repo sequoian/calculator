@@ -14,8 +14,7 @@ export default function operation(key, state) {
 
   switch(key) {
     case '=':
-      console.log('equals')
-      break
+      return equals(state)
     case 'n':
       return negate(state)
     case '.':
@@ -117,6 +116,34 @@ function op(key, state) {
     activeNum: null,
     storedNum: result === undefined ? 'undefined' : result.toString(),
     operation: key,
+    error: result === undefined ? true : false
+  }
+}
+
+function equals(state) {
+  const {activeNum, storedNum, operation} = state
+  let result
+  if (activeNum && !storedNum) return state
+  if (storedNum && !activeNum) {
+    if (!operation) return state
+    result = calculate(
+      operation, 
+      parseFloat(storedNum), 
+      parseFloat(storedNum)
+    )
+  }
+  else if (activeNum && storedNum) {
+    result = calculate(
+      operation,
+      parseFloat(storedNum),
+      parseFloat(activeNum)
+    )
+  }
+  
+  return {
+    activeNum: null,
+    operation: null,
+    storedNum: result === undefined ? 'undefined' : result.toString(),
     error: result === undefined ? true : false
   }
 }
