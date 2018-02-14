@@ -123,12 +123,16 @@ function op(key, state) {
     history = history.concat([activeNum, key])
   }
   else if (storedNum !== null) {
-    if (history[history.length-1].match(/[0-9]/)) {
+    const lastElem = history[history.length-1]
+    if (lastElem && lastElem.match(/[0-9]/)) {
       history = history.concat([key])
     }
-    else {
+    else if (lastElem) {
       history.pop()
       history.push(key)
+    }
+    else {
+      history = history.concat([storedNum, key])
     }
   }
 
