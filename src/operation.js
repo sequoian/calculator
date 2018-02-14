@@ -1,9 +1,15 @@
-function operation(key, state) {
+import calculate from './calculate'
+
+export default function operation(key, state) {
+  if (key === 'c') return clear()
+
+  if (state.error) return
+
   if (key.match(/[0-9]/)) {
     return digit(key, state)
   }
   else if (key.match(/[+\-*/%]/)) {
-    return console.log('operation')
+    return op(key, state)
   }
 
   switch(key) {
@@ -16,10 +22,8 @@ function operation(key, state) {
       return decimal(state)
     case 'b':
       return backspace(state)
-    case 'c':
-      return clear()
     default:
-      console.log('invalid')
+      console.log('invalid operation')
   }
 }
 
@@ -45,7 +49,7 @@ function backspace(state) {
   if (active === null) return state
   if (active !== '0')
     num = active.slice(0, -1)
-  if (!num)
+  if (!num || num === '-')
     num = '0'
   
   return {
@@ -90,8 +94,29 @@ function clear() {
   return {
     activeNum: '0',
     storedNum: null,
-    operation: null
+    operation: null,
+    error: false
   }
 }
 
-export default operation
+function op(key, state) {
+  const {activeNum, storedNum, operation} = state
+  let result = storedNum
+  if (storedNum && activeNum) {
+    result = calculate(
+      operation, 
+      parseFloat(storedNum), 
+      parseFloat(activeNum)
+    )
+  }
+  else if (activeNum !== null) {
+    result = activeNum
+  }
+
+  return {
+    activeNum: null,
+    storedNum: result === undefined ? 'undefined' : result.toString(),
+    operation: key,
+    error: result === undefined ? true : false
+  }
+}

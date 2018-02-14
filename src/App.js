@@ -9,7 +9,8 @@ class App extends Component {
     this.state = {
       activeNum: "0",
       storedNum: null,
-      operation: null
+      operation: null, 
+      error: false
     }
     this.handleClick = this.handleClick.bind(this)
   }
