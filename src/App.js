@@ -3,7 +3,7 @@ import Keypad from './Keypad'
 import Display from './Display'
 import operation from './operation'
 import keybind from './keybind'
-//import './App.css'
+import './App.css'
 
 class App extends Component {
   constructor(props) {

@@ -1,9 +1,10 @@
 import React from 'react'
 import Button from './Button'
+import './Keypad.css'
 
 const Keypad = ({handleClick}) => (
-  <div>
-    <div>
+  <div id="keypad">
+    <div className="row">
       <Button
         label="C"
         name="c"

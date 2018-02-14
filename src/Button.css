@@ -1,0 +1,20 @@
+button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: 1px solid black;
+  margin: 1px;
+  background-color: #f7f7f7;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #e0e0e0
+}
+
+button:active {
+  background-color: #bfbfbf;
+}
+
+button:focus {
+  outline: none;
+}

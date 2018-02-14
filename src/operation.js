@@ -102,7 +102,8 @@ function clear() {
     activeNum: '0',
     storedNum: null,
     operation: null,
-    error: false
+    error: false,
+    history: []
   }
 }
 
