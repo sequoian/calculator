@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Keypad from './Keypad'
 import Display from './Display'
 import operation from './operation'
+import keybind from './keybind'
 //import './App.css'
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
       error: false
     }
     this.handleClick = this.handleClick.bind(this)
+    document.addEventListener('keydown', keybind)
   }
 
   handleClick(key) {

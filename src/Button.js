@@ -2,7 +2,7 @@ import React from 'react'
 
 const Button = ({name, label, onClick}) => (
   <button
-    name={name}
+    id={name}
     onClick={() => onClick(name)}
   >
     {label || name}
