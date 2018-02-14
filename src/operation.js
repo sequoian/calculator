@@ -11,19 +11,15 @@ function operation(key, state) {
       console.log('equals')
       break
     case 'n':
-      console.log('negate')
-      break
+      return negate(state)
     case '.':
-      console.log('decimal')
-      break
+      return decimal(state)
     case 'b':
-      return backspace(key, state)
+      return backspace(state)
     case 'c':
-      console.log('clear')
-      break
+      return clear()
     default:
       console.log('invalid')
-      break
   }
 }
 
@@ -34,7 +30,7 @@ function digit(key, state) {
     num = key
   }
   else {
-    num = active.concat(key)
+    num = active + key
   }
 
   return {
@@ -43,7 +39,7 @@ function digit(key, state) {
   }
 }
 
-function backspace(key, state) {
+function backspace(state) {
   const active = state.activeNum
   let num
   if (active === null) return state
@@ -51,9 +47,50 @@ function backspace(key, state) {
     num = active.slice(0, -1)
   if (!num)
     num = '0'
+  
   return {
     ...state,
     activeNum: num
+  }
+}
+
+function decimal(state) {
+  const active = state.activeNum
+  let num = active
+  if (active === null)
+    num = '0.'
+  else if (active.indexOf('.') < 0)
+    num = active + '.'
+  
+  return {
+    ...state,
+    activeNum: num
+  }
+}
+
+function negate(state) {
+  const active = state.activeNum
+  let num
+  if (active === '0') return state
+  if (active === null && state.storedNum)
+    num = state.storedNum
+  if (active[0] === '-')
+    num = active.slice(1)
+  else {
+    num = '-' + active
+  }
+  
+  return {
+    ...state,
+    activeNum: num
+  }
+}
+
+function clear() {
+  return {
+    activeNum: '0',
+    storedNum: null,
+    operation: null
   }
 }
 
