@@ -109,22 +109,35 @@ function clear() {
 function op(key, state) {
   const {activeNum, storedNum, operation} = state
   let result = storedNum
+  let history = state.history
   if (storedNum && activeNum && operation) {
     result = calculate(
       operation, 
       parseFloat(storedNum), 
       parseFloat(activeNum)
     )
+    history = history.concat([activeNum, key])
   }
   else if (activeNum !== null) {
     result = activeNum
+    history = history.concat([activeNum, key])
+  }
+  else if (storedNum !== null) {
+    if (history[history.length-1].match(/[0-9]/)) {
+      history = history.concat([key])
+    }
+    else {
+      history.pop()
+      history.push(key)
+    }
   }
 
   return {
     activeNum: null,
     storedNum: result === undefined ? 'undefined' : result.toString(),
     operation: key,
-    error: result === undefined ? true : false
+    error: result === undefined ? true : false,
+    history: history
   }
 }
 
@@ -158,6 +171,7 @@ function equals(state) {
     activeNum: null,
     operation: null,
     storedNum: result === undefined ? 'undefined' : result.toString(),
-    error: result === undefined ? true : false
+    error: result === undefined ? true : false,
+    history: []
   }
 }

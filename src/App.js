@@ -10,7 +10,8 @@ class App extends Component {
     this.state = {
       activeNum: "0",
       storedNum: null,
-      operation: null, 
+      operation: null,
+      history: [], 
       error: false
     }
     this.handleClick = this.handleClick.bind(this)
@@ -23,12 +24,13 @@ class App extends Component {
   }
 
   render() {
-    const {activeNum, storedNum} = this.state
+    const {activeNum, storedNum, history} = this.state
     return (
       <div className="App">
         <Display
           active={activeNum}
           stored={storedNum}
+          history={history}
         />
         <Keypad
           handleClick={this.handleClick}
