@@ -30,14 +30,17 @@ const Keypad = ({handleClick}) => (
       <Button
         name="7"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="8"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="9"
         onClick={handleClick}
+        numeral
       />
       <Button
         label="×"
@@ -49,14 +52,17 @@ const Keypad = ({handleClick}) => (
       <Button
         name="4"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="5"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="6"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="-"
@@ -67,14 +73,17 @@ const Keypad = ({handleClick}) => (
       <Button
         name="1"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="2"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="3"
         onClick={handleClick}
+        numeral
       />
       <Button
         name="+"
@@ -85,10 +94,13 @@ const Keypad = ({handleClick}) => (
       <Button
         name="0"
         onClick={handleClick}
+        numeral
+        wide
       />
       <Button
         name="."
         onClick={handleClick}
+        numeral
       />
       <Button
         name="="
