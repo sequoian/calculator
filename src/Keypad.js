@@ -4,7 +4,7 @@ import './Keypad.css'
 
 const Keypad = ({handleClick}) => (
   <div id="keypad">
-    <div className="row">
+    <div>
       <Button
         label="C"
         name="c"

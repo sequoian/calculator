@@ -1,4 +1,6 @@
 .App {
   width: 100vw;
+  max-width: 150vh;
   height: 100vh;
+  max-height: 200vw;
 }

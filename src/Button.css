@@ -1,10 +1,19 @@
 button {
   -webkit-appearance: none;
   -moz-appearance: none;
-  border: 1px solid black;
-  margin: 1px;
   background-color: #f7f7f7;
   cursor: pointer;
+  width: 100%;
+  font-size: 0.1em;
+  border-top: none;
+  border-left: none;
+  --bcolor: #848484; /* border color variable */
+  border-right: 1px solid var(--bcolor);
+  border-bottom: 1px solid var(--bcolor);
+}
+
+button:last-child {
+  border-right: none;
 }
 
 button:hover {
