@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import Keypad from './Keypad'
 import Display from './Display'
-import operation from './operation'
-import keybind from './keybind'
+import operation from '../logic/operation'
+import keybind from '../logic/keybind'
 import './App.css'
 
 class App extends Component {
